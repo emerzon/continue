@@ -100,8 +100,10 @@ class OpenAI extends BaseLLM {
   }
 
   protected getMaxStopWords(): number {
+    if (this.model === "code-gecko") {
+      return 5;
+    }
     const url = new URL(this.apiBase!);
-
     if (this.maxStopWords !== undefined) {
       return this.maxStopWords;
     } else if (url.host === "api.deepseek.com") {
